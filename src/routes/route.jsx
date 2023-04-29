@@ -13,51 +13,60 @@ import PrivateRoutes from "./PrivateRoutes";
 import Terms from "../pages/terms/terms";
 
 const router = createBrowserRouter([
-
-    {
-        path:"/",
-        element:<LoginLayouts />,
-        children:[
-            {
-                path:"/",
-                element:<Navigate to="/category/0"></Navigate>
-            },
-            {
-                path:"login",
-                element:<Login />
-            },
-            {
-                path:"register",
-                element:<Register />
-            },
-            {
-                path:"terms",
-                element:<Terms />
-            }
-        ]
-    },
-    {
-        path:"category",
-        element:<Main />,
-        children:[
-            {
-                path:":Id",
-                element:<Category />,
-                loader:({params}) => fetch(`http://localhost:5000/categories/${params.Id}`)
-            }
-        ]
-    },
-    {
-        path:"news",
-        element:<NewsLayouts />,
-        children:[
-            {
-                path:":id",
-                element:<PrivateRoutes><News /></PrivateRoutes> ,
-                loader:({params}) => fetch(`http://localhost:5000/news/${params.id}`)
-            }
-        ]
-    }
-])
+  {
+    path: "/",
+    element: <LoginLayouts />,
+    children: [
+      {
+        path: "/",
+        element: <Navigate to="/category/0"></Navigate>,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
+      },
+      {
+        path: "terms",
+        element: <Terms />,
+      },
+    ],
+  },
+  {
+    path: "category",
+    element: <Main />,
+    children: [
+      {
+        path: ":Id",
+        element: <Category />,
+        loader: ({ params }) =>
+          fetch(
+            `https://news-dragon-server-furqanrupom.vercel.app/categories/${params.Id}`
+          ),
+      },
+    ],
+  },
+  {
+    path: "news",
+    element: <NewsLayouts />,
+    children: [
+      {
+        path: ":id",
+        element: (
+          <PrivateRoutes>
+            <News />
+          </PrivateRoutes>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://news-dragon-server-furqanrupom.vercel.app/news/${params.id}`
+          ),
+      },
+    ],
+  },
+]);
 
 export default router;

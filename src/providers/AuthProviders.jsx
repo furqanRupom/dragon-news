@@ -1,7 +1,7 @@
 import React from "react";
 import { createContext } from "react";
 
-//AIzaSyDmLNWR9NgP3uCVqnh3IwUWOkZBbSVkGmU
+//
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
